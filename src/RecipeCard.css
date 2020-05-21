@@ -2,3 +2,35 @@
   margin-bottom: 10px;
   padding: 0 5px;
 }
+
+.card-text {
+  font-weight: 400;
+  color: #909090;
+  font-size: 12px;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.card-footer {
+  border-top: none;
+  background-color: #ffffff;
+}
+
+button {
+  background: #f6f6f6;
+  border: 1px solid #f6f6f6;
+  user-select: none;
+  padding: 8px 20px;
+  margin-right: 5px;
+  border-radius: 30px;
+  transition: all 150ms ease-in-out;
+}
+
+button:hover {
+  background: #ffffff;
+  border: 1px solid #e7712b;
+}
+
+button:focus {
+  outline: thin dotted;
+}
