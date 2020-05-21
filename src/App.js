@@ -6,7 +6,9 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <Recipes />
+        <section className="wireframe">
+          <Recipes />
+        </section>
       </div>
     </div>
   );
