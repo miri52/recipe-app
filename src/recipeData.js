@@ -1,7 +1,7 @@
-import bakedTofu from "./images/bakedTofu.JPG";
-import bananaBread from "./images/bananaBread.JPG";
-import quinoaSalad from "./images/quinoaSalad.JPG";
-import chickenFajita from "./images/chickenFajita.JPG";
+import bakedTofu from "./images/bakedTofu.jpg";
+import bananaBread from "./images/bananaBread.jpg";
+import quinoaSalad from "./images/quinoaSalad.jpg";
+import chickenFajita from "./images/chickenFajita.jpg";
 
 const recipes = [
   {

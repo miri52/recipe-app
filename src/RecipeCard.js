@@ -22,7 +22,7 @@ function RecipeCard(props) {
               <span role="img" aria-label="love-emoji">
                 😍
               </span>
-              {likes}
+              {` ${likes}`}
             </button>
           </small>
         </div>
