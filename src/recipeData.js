@@ -1,22 +1,28 @@
 import bakedTofu from "./images/bakedTofu.JPG";
 import bananaBread from "./images/bananaBread.JPG";
 import quinoaSalad from "./images/quinoaSalad.JPG";
+import chickenFajita from "./images/chickenFajita.JPG";
 
 const recipes = [
   {
     id: "1",
-    name: "Baked tofu with honey-sesame glaze",
-    src: { bakedTofu },
+    name: "Baked Tofu with Honey-sesame Glaze",
+    src: bakedTofu,
   },
   {
     id: "2",
-    name: "Banana bread",
-    src: { bananaBread },
+    name: "Banana Bread",
+    src: bananaBread,
   },
   {
     id: "3",
-    name: "Quinoa salad",
-    src: { quinoaSalad },
+    name: "Quinoa Salad",
+    src: quinoaSalad,
+  },
+  {
+    id: "4",
+    name: "One-pan Chicken Fajita",
+    src: chickenFajita,
   },
 ];
 

@@ -1,11 +1,20 @@
 import React from "react";
 
 function RecipeCard(props) {
-  console.log(props.recipe.src);
   return (
-    <div className="RecipeCard col-4">
-      <h3>{props.recipe.name}</h3>
-      <p>emoji + number</p>
+    <div className="RecipeCard card ">
+      <img
+        src={props.recipe.src}
+        className="card-img-top"
+        alt={props.recipe.name}
+      />
+      <div className="card-body">
+        <h5 className="card-title">{props.recipe.name}</h5>
+        <p className="card-text">Some amazing comment</p>
+      </div>
+      <div className="card-footer">
+        <small className="text-muted">emoji + count</small>
+      </div>
     </div>
   );
 }

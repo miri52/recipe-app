@@ -7,8 +7,7 @@ function Recipes() {
   const recipeComponents = recipeData.map((item) => (
     <RecipeCard key={item.id} recipe={item} />
   ));
-
-  return <div className="Recipes row">{recipeComponents}</div>;
+  return <div className="Recipes card-deck">{recipeComponents}</div>;
 }
 
 export default Recipes;
