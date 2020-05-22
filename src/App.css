@@ -11,3 +11,11 @@
   padding: 40px 30px;
   margin-top: 40px;
 }
+
+button:focus {
+  outline: thin dotted;
+}
+
+input:focus {
+  outline: thin dotted;
+}

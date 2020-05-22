@@ -16,7 +16,7 @@
   background-color: #ffffff;
 }
 
-button {
+.RecipeCard button {
   background: #f6f6f6;
   border: 1px solid #f6f6f6;
   user-select: none;
@@ -26,11 +26,7 @@ button {
   transition: all 150ms ease-in-out;
 }
 
-button:hover {
+.RecipeCard button:hover {
   background: #ffffff;
   border: 1px solid #e7712b;
-}
-
-button:focus {
-  outline: thin dotted;
 }
