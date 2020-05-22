@@ -8,8 +8,13 @@ function Recipes() {
     <RecipeCard key={item.id} recipe={item} />
   ));
   return (
-    <div className="Recipes card-deck row row-cols-1 row-cols-md-4">
-      {recipeComponents}
+    <div className="Recipes">
+      <h2 style={{ textTransform: "uppercase", marginBottom: 30 }}>
+        All time flavourite
+      </h2>
+      <div className="card-deck row row-cols-1 row-cols-md-4">
+        {recipeComponents}
+      </div>
     </div>
   );
 }
