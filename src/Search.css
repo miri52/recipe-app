@@ -1,25 +1,22 @@
 form {
   margin: 30px auto;
   max-width: 500px;
+  border: solid 1px #dfdfdf;
+  padding: 10px;
+  font-size: 17px;
 }
 
 input {
-  border: solid 1px #dfdfdf;
-  border-right: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  font-size: 17px;
-  padding: 10px;
   width: 80%;
+  border: none;
 }
 
 .Search button {
   width: 20%;
-  padding: 10px;
   background: white;
   color: #4a717e;
-  font-size: 17px;
-  border: solid 1px #dfdfdf;
-  border-left: none;
   cursor: pointer;
+  border: none;
 }
