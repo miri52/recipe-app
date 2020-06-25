@@ -13,7 +13,7 @@ function App() {
           <section className="wireframe">
             <Search />
             <Switch>
-              <Route exact path="/recipes">
+              <Route exact path="/">
                 <Recipes />
               </Route>
               <Route path="/recipes/:recipeId">
