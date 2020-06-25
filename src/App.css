@@ -19,3 +19,7 @@ button:focus {
 input:focus {
   outline: thin dotted;
 }
+
+a {
+  color: inherit;
+}

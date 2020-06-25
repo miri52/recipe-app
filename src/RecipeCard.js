@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./RecipeCard.css";
+import { Link } from "react-router-dom";
 
 function RecipeCard(props) {
   const [likes, setLikes] = useState(0);
@@ -13,7 +14,9 @@ function RecipeCard(props) {
           alt={props.recipe.name}
         />
         <div className="card-body">
-          <h5 className="card-title">{props.recipe.name}</h5>
+          <h5 className="card-title">
+            <Link to={`/recipes/${props.recipe.id}`}>{props.recipe.name}</Link>
+          </h5>
           <p className="card-text">{props.recipe.hashtag}</p>
         </div>
         <div className="card-footer">
