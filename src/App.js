@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <div className="container">
+        <div className="app-container">
           <section className="wireframe">
             <Search />
             <Switch>

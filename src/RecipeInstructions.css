@@ -1,0 +1,13 @@
+.RecipeInstructions .col-sm-6 {
+  margin: 30px auto;
+  max-width: 600px;
+  padding: 10px;
+  font-size: 17px;
+}
+
+@media (min-width: 560px) {
+  #with-border {
+    border-right: solid 1px #dfdfdf;
+    height: 400px;
+  }
+}
