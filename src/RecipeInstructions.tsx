@@ -1,4 +1,3 @@
-import React from "react";
 import "./RecipeInstructions.css";
 
 function RecipeInstructions() {

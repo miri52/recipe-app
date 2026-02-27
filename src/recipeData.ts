@@ -1,9 +1,10 @@
+import { Recipe } from "./types";
 import bakedTofu from "./images/bakedTofu.jpg";
 import bananaBread from "./images/bananaBread.jpg";
 import quinoaSalad from "./images/quinoaSalad.jpg";
 import chickenFajita from "./images/chickenFajita.jpg";
 
-const recipes = [
+const recipes: Recipe[] = [
   {
     id: "1",
     name: "Baked Tofu with Honey-sesame Glaze",

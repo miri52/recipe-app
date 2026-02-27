@@ -1,12 +1,12 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import recipeData from "./recipeData";
 import RecipeInstructions from "./RecipeInstructions";
 import "./RecipeDetails.css";
 
-function RecipeDetails(props) {
+function RecipeDetails() {
   const { recipeId } = useParams();
   const thisRecipe = recipeData.find((recipe) => recipeId === recipe.id);
+  if (!thisRecipe) return <p>Recipe not found.</p>;
   return (
     <div className="RecipeDetails">
       <h1>{thisRecipe.name}</h1>

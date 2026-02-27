@@ -1,4 +1,3 @@
-import React from "react";
 import "./RecipeCard.css";
 import recipeData from "./recipeData";
 import RecipeCard from "./RecipeCard";
