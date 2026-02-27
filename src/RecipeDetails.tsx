@@ -9,26 +9,26 @@ function RecipeDetails() {
   if (!thisRecipe) return <p>Recipe not found.</p>;
   return (
     <div className="RecipeDetails">
-      <h1>{thisRecipe.name}</h1>
+      <h1 className="text-3xl font-bold mb-4">{thisRecipe.name}</h1>
       {/*real data to be obtained from API */}
-      <div className="container">
-        <div className="row cooking-info">
-          <div className="col-sm-6">
+      <div className="mx-auto max-w-2xl px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 cooking-info">
+          <div>
             Preparation time: <strong>20 mins</strong>
           </div>
-          <div className="col-sm-6">
+          <div>
             Portions: <strong>4</strong>{" "}
           </div>
-          <div className="col-sm-6">
+          <div>
             Cooking time: <strong> 30 mins</strong>{" "}
           </div>
-          <div className="col-sm-6">
+          <div>
             Difficulty: <strong>easy</strong>
           </div>
         </div>
       </div>
       <img
-        className="img-fluid"
+        className="h-auto"
         src={thisRecipe.src}
         alt={thisRecipe.name}
         style={{ maxWidth: "30%" }}

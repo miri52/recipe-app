@@ -9,6 +9,7 @@ function Recipes() {
   return (
     <div className="Recipes">
       <h2
+        className="text-2xl font-bold"
         style={{
           textTransform: "uppercase",
           marginBottom: 30,
@@ -16,7 +17,7 @@ function Recipes() {
       >
         All time flavourite
       </h2>
-      <div className="row row-cols-1 row-cols-md-4 g-3">{recipeComponents}</div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">{recipeComponents}</div>
     </div>
   );
 }

@@ -11,17 +11,17 @@ function RecipeCard({ recipe }: RecipeCardProps) {
   const [likes, setLikes] = useState(0);
 
   return (
-    <div className=" RecipeCard col sm-3">
-      <div className="card h-100">
-        <img src={recipe.src} className="card-img-top" alt={recipe.name} />
-        <div className="card-body">
-          <h5 className="card-title">
+    <div className="RecipeCard">
+      <div className="flex flex-col h-full min-w-[150px] rounded border border-[#dfdfdf] bg-white overflow-hidden">
+        <img src={recipe.src} className="w-full" alt={recipe.name} />
+        <div className="flex-1 p-4">
+          <h5 className="text-base font-semibold mb-1">
             <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
           </h5>
-          <p className="card-text">{recipe.hashtag}</p>
+          <p className="text-xs text-[#909090] uppercase font-normal">{recipe.hashtag}</p>
         </div>
-        <div className="card-footer">
-          <small className="text-muted">
+        <div className="px-4 py-3 bg-white">
+          <small className="text-[#909090]">
             <button onClick={() => setLikes(likes + 1)}>
               <span role="img" aria-label="love-emoji">
                 😍
