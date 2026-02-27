@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Search from "./Search";
 import Recipes from "./Recipes";
@@ -12,14 +12,10 @@ function App() {
         <div className="app-container">
           <section className="wireframe">
             <Search />
-            <Switch>
-              <Route exact path="/">
-                <Recipes />
-              </Route>
-              <Route path="/recipes/:recipeId">
-                <RecipeDetails />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route path="/" element={<Recipes />} />
+              <Route path="/recipes/:recipeId" element={<RecipeDetails />} />
+            </Routes>
           </section>
         </div>
       </div>
