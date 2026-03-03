@@ -13,7 +13,7 @@ function RecipeCard({ recipe }: RecipeCardProps) {
   return (
     <div className="RecipeCard">
       <div className="flex flex-col h-full min-w-[150px] rounded border border-[#dfdfdf] bg-white overflow-hidden">
-        <img src={recipe.src} className="w-full" alt={recipe.name} />
+        <img src={recipe.image_url} className="w-full" alt={recipe.name} />
         <div className="flex-1 p-4">
           <h5 className="text-base font-semibold mb-1">
             <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
