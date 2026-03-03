@@ -14,15 +14,15 @@ function RecipeCard({ recipe }: RecipeCardProps) {
     <div className="RecipeCard">
       <Link
         to={`/recipes/${recipe.id}`}
-        className="flex flex-col h-full min-w-[150px] rounded border border-[#dfdfdf] bg-white overflow-hidden"
+        className="flex flex-col h-full min-w-37.5 rounded border border-[#dfdfdf] bg-white overflow-hidden"
       >
         <img src={recipe.image_url} className="w-full" alt={recipe.name} />
         <div className="flex-1 p-4">
           <h5 className="text-base font-semibold mb-1">{recipe.name}</h5>
-          <p className="text-xs text-[#909090] uppercase font-normal">{recipe.hashtag}</p>
+          <p className="text-xs text-muted uppercase font-normal">{recipe.hashtag}</p>
         </div>
         <div className="px-4 py-3 bg-white">
-          <small className="text-[#909090]">
+          <small className="text-muted">
             <button
               onClick={(e) => {
                 e.preventDefault();
