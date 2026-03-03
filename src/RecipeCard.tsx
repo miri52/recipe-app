@@ -12,17 +12,23 @@ function RecipeCard({ recipe }: RecipeCardProps) {
 
   return (
     <div className="RecipeCard">
-      <div className="flex flex-col h-full min-w-[150px] rounded border border-[#dfdfdf] bg-white overflow-hidden">
+      <Link
+        to={`/recipes/${recipe.id}`}
+        className="flex flex-col h-full min-w-[150px] rounded border border-[#dfdfdf] bg-white overflow-hidden"
+      >
         <img src={recipe.image_url} className="w-full" alt={recipe.name} />
         <div className="flex-1 p-4">
-          <h5 className="text-base font-semibold mb-1">
-            <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-          </h5>
+          <h5 className="text-base font-semibold mb-1">{recipe.name}</h5>
           <p className="text-xs text-[#909090] uppercase font-normal">{recipe.hashtag}</p>
         </div>
         <div className="px-4 py-3 bg-white">
           <small className="text-[#909090]">
-            <button onClick={() => setLikes(likes + 1)}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setLikes(likes + 1);
+              }}
+            >
               <span role="img" aria-label="love-emoji">
                 😍
               </span>
@@ -30,7 +36,7 @@ function RecipeCard({ recipe }: RecipeCardProps) {
             </button>
           </small>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
