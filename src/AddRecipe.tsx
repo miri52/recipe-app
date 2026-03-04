@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
+import { Difficulty } from "./types";
 import "./AddRecipe.css";
 
 function AddRecipe() {
@@ -12,7 +13,7 @@ function AddRecipe() {
   const [servings, setServings] = useState<number | "">(4);
   const [prepTime, setPrepTime] = useState<number | "">("");
   const [cookTime, setCookTime] = useState<number | "">("");
-  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [ingredients, updateIngredient, addIngredient, removeIngredient] = useStringList();
   const [instructions, updateInstruction, addInstruction, removeInstruction] = useStringList();
   const [submitting, setSubmitting] = useState(false);
@@ -149,7 +150,7 @@ function AddRecipe() {
             <select
               id="difficulty"
               value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value as "easy" | "medium" | "hard")}
+              onChange={(e) => setDifficulty(e.target.value as Difficulty)}
             >
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
