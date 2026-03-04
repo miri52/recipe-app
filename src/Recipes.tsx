@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./RecipeCard.css";
+import "./Recipes.css";
 import Search from "./Search";
 import RecipeCard from "./RecipeCard";
 import { supabase } from "./supabaseClient";
@@ -29,13 +30,7 @@ function Recipes() {
         </Link>
       </div>
       <Search />
-      <h2
-        className="text-3xl font-normal"
-        style={{
-          textTransform: "uppercase",
-          marginBottom: "1.875em",
-        }}
-      >
+      <h2 className="text-3xl font-normal uppercase mb-8">
         All time flavourite
       </h2>
       {loading ? (

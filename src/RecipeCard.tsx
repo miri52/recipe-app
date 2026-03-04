@@ -11,11 +11,10 @@ function RecipeCard({ recipe }: RecipeCardProps) {
   const [likes, setLikes] = useState(0);
 
   return (
-    <div className="RecipeCard">
-      <Link
-        to={`/recipes/${recipe.id}`}
-        className="flex flex-col h-full min-w-37.5 rounded border border-[#dfdfdf] bg-white overflow-hidden"
-      >
+    <Link
+      className="RecipeCard flex flex-col h-full min-w-37.5 rounded border border-border bg-white overflow-hidden"
+      to={`/recipes/${recipe.id}`}
+    >
         <img src={recipe.image_url} className="w-full" alt={recipe.name} />
         <div className="flex-1 p-4">
           <h5 className="text-2xl font-medium mb-3">{recipe.name}</h5>
@@ -36,8 +35,7 @@ function RecipeCard({ recipe }: RecipeCardProps) {
             </button>
           </small>
         </div>
-      </Link>
-    </div>
+    </Link>
   );
 }
 

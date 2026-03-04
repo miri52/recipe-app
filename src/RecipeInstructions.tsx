@@ -10,7 +10,7 @@ function RecipeInstructions({ ingredients, instructions }: Props) {
     <div className="RecipeInstructions">
       <div className="mx-auto max-w-4xl px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2">
-          <div className="instructions-col" id="with-border">
+          <div className="instructions-col with-border">
             <h4 className="text-lg font-semibold">Ingredients</h4>
             <ul>
               {ingredients.map((item, i) => (

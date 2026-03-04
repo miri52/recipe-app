@@ -71,7 +71,7 @@ function AddRecipe() {
 
   return (
     <div className="AddRecipe">
-      <h2 className="text-2xl font-bold" style={{ textTransform: "uppercase", marginBottom: 30 }}>
+      <h2 className="text-2xl font-bold uppercase mb-8">
         Add New Recipe
       </h2>
       {error && <p className="add-recipe-error">{error}</p>}

@@ -1,0 +1,19 @@
+.add-recipe-bar {
+  text-align: right;
+  margin-bottom: 0.5em;
+}
+
+.add-recipe-link {
+  padding: 0.5em 1em;
+  background: var(--color-accent);
+  color: white !important;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.add-recipe-link:hover {
+  background: var(--color-accent-dark);
+}

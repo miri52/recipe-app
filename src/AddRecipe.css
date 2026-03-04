@@ -5,7 +5,7 @@
 }
 
 .add-recipe-error {
-  color: #c0392b;
+  color: var(--color-error);
   margin-bottom: 1em;
 }
 
@@ -19,7 +19,7 @@
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 0.375em;
-  color: #4a717e;
+  color: var(--color-primary);
 }
 
 .add-recipe-form input[type="text"],
@@ -27,7 +27,7 @@
 .add-recipe-form input[type="file"],
 .add-recipe-form select,
 .add-recipe-form textarea {
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   padding: 0.5em 0.625em;
   font-size: 14px;
@@ -72,7 +72,7 @@
 .remove-btn {
   padding: 0.375em 0.625em;
   background: transparent;
-  border: 1px solid #dfdfdf;
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
@@ -88,21 +88,21 @@
   margin-top: 0.25em;
   padding: 0.375em 0.75em;
   background: transparent;
-  border: 1px solid #4a717e;
+  border: 1px solid var(--color-primary);
   border-radius: 4px;
-  color: #4a717e;
+  color: var(--color-primary);
   font-size: 13px;
   cursor: pointer;
 }
 
 .add-btn:hover {
-  background: #4a717e;
+  background: var(--color-primary);
   color: white;
 }
 
 .submit-btn {
   padding: 0.625em 1.75em;
-  background: #e7712b;
+  background: var(--color-accent);
   color: white;
   border: none;
   border-radius: 4px;
@@ -113,7 +113,7 @@
 }
 
 .submit-btn:hover {
-  background: #cf5f1e;
+  background: var(--color-accent-dark);
 }
 
 .submit-btn:disabled {
