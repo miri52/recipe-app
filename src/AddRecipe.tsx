@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
+import { useStringList } from "./hooks/useStringList";
 import "./AddRecipe.css";
 
 function AddRecipe() {
@@ -12,36 +13,12 @@ function AddRecipe() {
   const [prepTime, setPrepTime] = useState<number | "">("");
   const [cookTime, setCookTime] = useState<number | "">("");
   const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
-  const [ingredients, setIngredients] = useState<string[]>([""]);
-  const [instructions, setInstructions] = useState<string[]>([""]);
+  const [ingredients, updateIngredient, addIngredient, removeIngredient] = useStringList();
+  const [instructions, updateInstruction, addInstruction, removeInstruction] = useStringList();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  function updateIngredient(index: number, value: string) {
-    setIngredients((prev) => prev.map((item, i) => (i === index ? value : item)));
-  }
-
-  function addIngredient() {
-    setIngredients((prev) => [...prev, ""]);
-  }
-
-  function removeIngredient(index: number) {
-    setIngredients((prev) => prev.filter((_, i) => i !== index));
-  }
-
-  function updateInstruction(index: number, value: string) {
-    setInstructions((prev) => prev.map((item, i) => (i === index ? value : item)));
-  }
-
-  function addInstruction() {
-    setInstructions((prev) => [...prev, ""]);
-  }
-
-  function removeInstruction(index: number) {
-    setInstructions((prev) => prev.filter((_, i) => i !== index));
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
