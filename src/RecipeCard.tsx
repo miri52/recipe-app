@@ -18,7 +18,7 @@ function RecipeCard({ recipe }: RecipeCardProps) {
       >
         <img src={recipe.image_url} className="w-full" alt={recipe.name} />
         <div className="flex-1 p-4">
-          <h5 className="text-base font-semibold mb-1">{recipe.name}</h5>
+          <h5 className="text-2xl font-medium mb-3">{recipe.name}</h5>
           <p className="text-xs text-muted uppercase font-normal">{recipe.hashtag}</p>
         </div>
         <div className="px-4 py-3 bg-white">

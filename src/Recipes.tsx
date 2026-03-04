@@ -23,14 +23,14 @@ function Recipes() {
 
   return (
     <div className="Recipes">
-      <div className="app-header">
-        <Search />
+      <div className="add-recipe-bar">
         <Link to="/recipes/new" className="add-recipe-link">
           + Add Recipe
         </Link>
       </div>
+      <Search />
       <h2
-        className="text-2xl font-bold"
+        className="text-3xl font-normal"
         style={{
           textTransform: "uppercase",
           marginBottom: "1.875em",
