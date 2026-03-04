@@ -5,6 +5,10 @@ import { useStringList } from "./hooks/useStringList";
 import { Difficulty } from "./types";
 import "./AddRecipe.css";
 
+function parseNumericInput(value: string): number | "" {
+  return value === "" ? "" : Number(value);
+}
+
 function AddRecipe() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -116,7 +120,7 @@ function AddRecipe() {
               type="number"
               min={1}
               value={servings}
-              onChange={(e) => setServings(e.target.value === "" ? "" : Number(e.target.value))}
+              onChange={(e) => setServings(parseNumericInput(e.target.value))}
               required
             />
           </div>
@@ -128,7 +132,7 @@ function AddRecipe() {
               type="number"
               min={0}
               value={prepTime}
-              onChange={(e) => setPrepTime(e.target.value === "" ? "" : Number(e.target.value))}
+              onChange={(e) => setPrepTime(parseNumericInput(e.target.value))}
               required
             />
           </div>
@@ -140,7 +144,7 @@ function AddRecipe() {
               type="number"
               min={0}
               value={cookTime}
-              onChange={(e) => setCookTime(e.target.value === "" ? "" : Number(e.target.value))}
+              onChange={(e) => setCookTime(parseNumericInput(e.target.value))}
               required
             />
           </div>
