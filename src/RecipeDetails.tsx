@@ -8,9 +8,10 @@ import "./RecipeDetails.css";
 function RecipeDetails() {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!!recipeId);
 
   useEffect(() => {
+    if (!recipeId) return;
     supabase
       .from("recipes")
       .select("*")
