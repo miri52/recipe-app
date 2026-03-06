@@ -1,6 +1,6 @@
 .RecipeCard button {
-  background: #f6f6f6;
-  border: 1px solid #f6f6f6;
+  background: var(--color-background);
+  border: 1px solid var(--color-background);
   user-select: none;
   padding: 8px 20px;
   margin-right: 5px;
@@ -10,5 +10,5 @@
 
 .RecipeCard button:hover {
   background: #ffffff;
-  border: 1px solid #e7712b;
+  border: 1px solid var(--color-accent);
 }
