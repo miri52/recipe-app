@@ -9,6 +9,8 @@ function parseNumericInput(value: string): number | "" {
   return value === "" ? "" : Number(value);
 }
 
+const isNonEmpty = (s: string) => s.trim() !== "";
+
 function AddRecipe() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -59,8 +61,8 @@ function AddRecipe() {
         prep_time_mins: Number(prepTime),
         cook_time_mins: Number(cookTime),
         difficulty,
-        ingredients: ingredients.filter((s) => s.trim() !== ""),
-        instructions: instructions.filter((s) => s.trim() !== ""),
+        ingredients: ingredients.filter(isNonEmpty),
+        instructions: instructions.filter(isNonEmpty),
       },
     ]);
 

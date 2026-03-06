@@ -5,16 +5,16 @@ import "./Recipes.css";
 import Search from "./Search";
 import RecipeCard from "./RecipeCard";
 import { supabase } from "./supabaseClient";
-import { Recipe } from "./types";
+import { RecipeListItem } from "./types";
 
 function Recipes() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipes, setRecipes] = useState<RecipeListItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     supabase
       .from("recipes")
-      .select("*")
+      .select("id, name, image_url, hashtag, created_at")
       .order("created_at", { ascending: false })
       .then(({ data }) => {
         setRecipes(data ?? []);

@@ -13,3 +13,5 @@ export interface Recipe {
   instructions: string[];
   created_at: string;
 }
+
+export type RecipeListItem = Pick<Recipe, 'id' | 'name' | 'image_url' | 'hashtag' | 'created_at'>;
