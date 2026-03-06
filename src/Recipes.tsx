@@ -10,6 +10,7 @@ import { RecipeListItem } from "./types";
 function Recipes() {
   const [recipes, setRecipes] = useState<RecipeListItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     supabase
@@ -22,6 +23,10 @@ function Recipes() {
       });
   }, []);
 
+  const filtered = recipes.filter((r) =>
+    r.name.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
     <div className="Recipes">
       <div className="add-recipe-bar">
@@ -29,17 +34,17 @@ function Recipes() {
           + Add Recipe
         </Link>
       </div>
-      <Search />
+      <Search value={query} onChange={setQuery} />
       <h2 className="text-3xl font-normal uppercase mb-8">
         All time flavourite
       </h2>
       {loading ? (
         <p>Loading recipes…</p>
-      ) : recipes.length === 0 ? (
-        <p>No recipes yet. Add one!</p>
+      ) : filtered.length === 0 ? (
+        <p>{query ? "No recipes match your search." : "No recipes yet. Add one!"}</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-          {recipes.map((item) => (
+          {filtered.map((item) => (
             <RecipeCard key={item.id} recipe={item} />
           ))}
         </div>
