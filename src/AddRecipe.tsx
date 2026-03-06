@@ -30,49 +30,51 @@ function AddRecipe() {
     setSubmitting(true);
     setError(null);
 
-    let image_url = "";
+    try {
+      let image_url = "";
 
-    if (imageFile) {
-      const ext = imageFile.name.split(".").pop();
-      const fileName = `${Date.now()}.${ext}`;
-      const { error: uploadError } = await supabase.storage
-        .from("recipe-images")
-        .upload(fileName, imageFile);
+      if (imageFile) {
+        const ext = imageFile.name.split(".").pop();
+        const fileName = `${Date.now()}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from("recipe-images")
+          .upload(fileName, imageFile);
 
-      if (uploadError) {
-        setError("Image upload failed: " + uploadError.message);
-        setSubmitting(false);
+        if (uploadError) {
+          setError("Image upload failed: " + uploadError.message);
+          return;
+        }
+
+        const { data: urlData } = supabase.storage
+          .from("recipe-images")
+          .getPublicUrl(fileName);
+
+        image_url = urlData.publicUrl;
+      }
+
+      const { error: insertError } = await supabase.from("recipes").insert([
+        {
+          name,
+          hashtag,
+          image_url,
+          servings: Number(servings),
+          prep_time_mins: Number(prepTime),
+          cook_time_mins: Number(cookTime),
+          difficulty,
+          ingredients: ingredients.filter(isNonEmpty),
+          instructions: instructions.filter(isNonEmpty),
+        },
+      ]);
+
+      if (insertError) {
+        setError("Failed to save recipe: " + insertError.message);
         return;
       }
 
-      const { data: urlData } = supabase.storage
-        .from("recipe-images")
-        .getPublicUrl(fileName);
-
-      image_url = urlData.publicUrl;
-    }
-
-    const { error: insertError } = await supabase.from("recipes").insert([
-      {
-        name,
-        hashtag,
-        image_url,
-        servings: Number(servings),
-        prep_time_mins: Number(prepTime),
-        cook_time_mins: Number(cookTime),
-        difficulty,
-        ingredients: ingredients.filter(isNonEmpty),
-        instructions: instructions.filter(isNonEmpty),
-      },
-    ]);
-
-    if (insertError) {
-      setError("Failed to save recipe: " + insertError.message);
+      navigate("/");
+    } finally {
       setSubmitting(false);
-      return;
     }
-
-    navigate("/");
   }
 
   return (
