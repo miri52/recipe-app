@@ -1,12 +1,12 @@
-form {
+.Search form {
   margin: 30px auto;
   max-width: 500px;
-  border: solid 1px #dfdfdf;
+  border: solid 1px var(--color-border);
   padding: 10px;
   font-size: 17px;
 }
 
-input {
+.Search input {
   -webkit-box-shadow: none;
   box-shadow: none;
   width: 80%;
@@ -15,7 +15,7 @@ input {
 
 .Search button {
   background: white;
-  color: #4a717e;
+  color: var(--color-primary);
   cursor: pointer;
   border: none;
 }

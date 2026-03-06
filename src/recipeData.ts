@@ -1,10 +1,17 @@
-import { Recipe } from "./types";
+// Legacy backup — no longer used by the app. Keep for reference.
 import bakedTofu from "./images/bakedTofu.jpg";
 import bananaBread from "./images/bananaBread.jpg";
 import quinoaSalad from "./images/quinoaSalad.jpg";
 import chickenFajita from "./images/chickenFajita.jpg";
 
-const recipes: Recipe[] = [
+interface LegacyRecipe {
+  id: string;
+  name: string;
+  src: string;
+  hashtag: string;
+}
+
+const recipes: LegacyRecipe[] = [
   {
     id: "1",
     name: "Baked Tofu with Honey-sesame Glaze",

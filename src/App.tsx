@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Search from "./Search";
 import Recipes from "./Recipes";
 import RecipeDetails from "./RecipeDetails";
+import AddRecipe from "./AddRecipe";
 
 function App() {
   return (
@@ -10,9 +10,9 @@ function App() {
       <div className="App">
         <div className="app-container">
           <section className="wireframe">
-            <Search />
             <Routes>
               <Route path="/" element={<Recipes />} />
+              <Route path="/recipes/new" element={<AddRecipe />} />
               <Route path="/recipes/:recipeId" element={<RecipeDetails />} />
             </Routes>
           </section>

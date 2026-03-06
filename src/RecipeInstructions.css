@@ -6,8 +6,8 @@
 }
 
 @media (min-width: 560px) {
-  #with-border {
-    border-right: solid 1px #dfdfdf;
+  .with-border {
+    border-right: solid 1px var(--color-border);
     height: 400px;
   }
 }
