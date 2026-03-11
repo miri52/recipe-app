@@ -1,5 +1,15 @@
 .App {
+  text-align: center;
   font-family: "Montserrat", sans-serif;
+}
+
+.App .app-container {
+  min-width: 360px;
+}
+
+.App .wireframe {
+  padding: 40px 30px;
+  margin-top: 40px;
 }
 
 button:focus {

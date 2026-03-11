@@ -26,7 +26,7 @@ function RecipeDetails() {
   if (!recipe) return <p>Recipe not found.</p>;
 
   return (
-    <div className="RecipeDetails">
+    <div className="RecipeDetails text-left">
       <nav className="bg-primary">
         <div className="px-8 h-12 flex items-center">
           <Link to="/" className="text-sm" style={{ color: "#ffffff" }}>
@@ -35,52 +35,62 @@ function RecipeDetails() {
         </div>
       </nav>
 
-      <div className="px-8 md:px-16">
-
+      <div className="max-w-5xl 2xl:max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr]">
           {recipe.image_url && (
             <img
               src={recipe.image_url}
               alt={recipe.name}
-              className="w-full"
+              className="w-full h-full object-cover"
             />
           )}
           <div className="py-6 md:px-8">
             <h1 className="text-3xl font-bold mb-1">{recipe.name}</h1>
-            <p className="text-muted text-sm uppercase mb-6">{recipe.hashtag}</p>
+            <p className="text-muted text-sm uppercase mb-6">
+              {recipe.hashtag}
+            </p>
             <div className="grid grid-cols-2 gap-3 mb-8">
               <div className="border border-border rounded-md p-3">
                 <p className="text-xs text-muted mb-1">Prep time</p>
-                <p className="text-primary font-medium">{recipe.prep_time_mins} mins</p>
+                <p className="text-primary font-medium">
+                  {recipe.prep_time_mins} mins
+                </p>
               </div>
               <div className="border border-border rounded-md p-3">
                 <p className="text-xs text-muted mb-1">Cook time</p>
-                <p className="text-primary font-medium">{recipe.cook_time_mins} mins</p>
+                <p className="text-primary font-medium">
+                  {recipe.cook_time_mins} mins
+                </p>
               </div>
               <div className="border border-border rounded-md p-3">
                 <p className="text-xs text-muted mb-1">Servings</p>
-                <p className="text-primary font-medium">{recipe.servings} people</p>
+                <p className="text-primary font-medium">
+                  {recipe.servings} people
+                </p>
               </div>
               <div className="border border-border rounded-md p-3">
                 <p className="text-xs text-muted mb-1">Difficulty</p>
-                <p className="text-primary font-medium capitalize">{recipe.difficulty}</p>
+                <p className="text-primary font-medium capitalize">
+                  {recipe.difficulty}
+                </p>
               </div>
             </div>
             <h4 className="text-lg font-semibold mb-3">Ingredients</h4>
-            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1">
+            <ul className="columns-1 sm:columns-2 gap-x-4 space-y-1 list-disc list-inside">
               {recipe.ingredients.map((item, i) => (
-                <li key={i}>{item}</li>
+                <li key={i} className="marker:text-muted">
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <hr className="border-t border-border" />
+        <hr className="border-t border-border md:mt-8" />
 
         <div className="py-6">
           <RecipeInstructions instructions={recipe.instructions} />
         </div>
-
       </div>
     </div>
   );
