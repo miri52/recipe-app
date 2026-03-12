@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
 import { Difficulty } from "./types";
@@ -79,9 +79,11 @@ function AddRecipe() {
   }
 
   return (
-    <div className="AddRecipe">
-      <NavBar />
-      <div className="wireframe">
+    <div>
+      <NavBar>
+        <Link to="/" className="text-sm text-white!">← Back to home</Link>
+      </NavBar>
+      <div className="AddRecipe wireframe">
       <h2 className="text-2xl font-bold uppercase mb-8">
         Add New Recipe
       </h2>
