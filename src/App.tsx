@@ -9,13 +9,11 @@ function App() {
     <Router>
       <div className="App">
         <div className="app-container">
-          <section className="wireframe">
-            <Routes>
-              <Route path="/" element={<Recipes />} />
-              <Route path="/recipes/new" element={<AddRecipe />} />
-              <Route path="/recipes/:recipeId" element={<RecipeDetails />} />
-            </Routes>
-          </section>
+          <Routes>
+            <Route path="/" element={<Recipes />} />
+            <Route path="/recipes/new" element={<AddRecipe />} />
+            <Route path="/recipes/:recipeId" element={<RecipeDetails />} />
+          </Routes>
         </div>
       </div>
     </Router>

@@ -78,7 +78,7 @@ function AddRecipe() {
   }
 
   return (
-    <div className="AddRecipe">
+    <div className="AddRecipe wireframe">
       <h2 className="text-2xl font-bold uppercase mb-8">
         Add New Recipe
       </h2>

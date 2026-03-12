@@ -6,6 +6,7 @@ import Search from "./Search";
 import RecipeCard from "./RecipeCard";
 import { supabase } from "./supabaseClient";
 import { RecipeListItem } from "./types";
+import NavBar from "./NavBar";
 
 function Recipes() {
   const [recipes, setRecipes] = useState<RecipeListItem[]>([]);
@@ -29,6 +30,8 @@ function Recipes() {
 
   return (
     <div className="Recipes">
+      <NavBar />
+      <div className="wireframe">
       <div className="add-recipe-bar">
         <Link to="/recipes/new" className="add-recipe-link">
           + Add Recipe
@@ -49,6 +52,7 @@ function Recipes() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }

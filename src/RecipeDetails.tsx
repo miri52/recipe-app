@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { Recipe } from "./types";
 import RecipeInstructions from "./RecipeInstructions";
+import NavBar from "./NavBar";
 
 function RecipeDetails() {
   const { recipeId } = useParams();
@@ -27,13 +28,11 @@ function RecipeDetails() {
 
   return (
     <div className="RecipeDetails text-left">
-      <nav className="bg-primary">
-        <div className="px-8 h-12 flex items-center">
-          <Link to="/" className="text-sm" style={{ color: "#ffffff" }}>
-            ← Back to recipes
-          </Link>
-        </div>
-      </nav>
+      <NavBar>
+        <Link to="/" className="text-sm" style={{ color: "#ffffff" }}>
+          ← Back to recipes
+        </Link>
+      </NavBar>
 
       <div className="max-w-5xl 2xl:max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr]">
