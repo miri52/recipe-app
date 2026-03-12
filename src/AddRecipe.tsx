@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
@@ -26,7 +26,7 @@ function AddRecipe() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
@@ -100,153 +100,153 @@ function AddRecipe() {
         <Link to="/" className="text-sm text-white!">← Back to home</Link>
       </NavBar>
       <div className="AddRecipe wireframe">
-      <h2 className="text-2xl font-bold uppercase mb-8">
-        Add New Recipe
-      </h2>
-      {error && <p className="add-recipe-error">{error}</p>}
-      <form onSubmit={handleSubmit} className="add-recipe-form">
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="hashtag">Hashtag</label>
-          <input
-            id="hashtag"
-            type="text"
-            value={hashtag}
-            onChange={(e) => setHashtag(e.target.value)}
-            placeholder="#italian"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <span className="form-label">Image</span>
-          <label htmlFor="image" className="file-picker" tabIndex={0}>
-            {imageFile ? imageFile.name : "Choose file"}
-          </label>
-          <input
-            id="image"
-            type="file"
-            accept="image/*"
-            className="sr-only"
-            onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
-          />
-        </div>
-
-        <div className="form-row">
+        <h2 className="text-2xl font-bold uppercase mb-8">
+          Add New Recipe
+        </h2>
+        {error && <p className="add-recipe-error">{error}</p>}
+        <form onSubmit={handleSubmit} className="add-recipe-form">
           <div className="form-group">
-            <label htmlFor="servings">Servings</label>
+            <label htmlFor="name">Name</label>
             <input
-              id="servings"
-              type="number"
-              min={1}
-              value={servings}
-              onChange={(e) => setServings(parseNumericInput(e.target.value))}
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="prepTime">Prep time (mins)</label>
+            <label htmlFor="hashtag">Hashtag</label>
             <input
-              id="prepTime"
-              type="number"
-              min={0}
-              value={prepTime}
-              onChange={(e) => setPrepTime(parseNumericInput(e.target.value))}
+              id="hashtag"
+              type="text"
+              value={hashtag}
+              onChange={(e) => setHashtag(e.target.value)}
+              placeholder="#italian"
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="cookTime">Cook time (mins)</label>
+            <span className="form-label">Image</span>
+            <label htmlFor="image" className="file-picker" tabIndex={0}>
+              {imageFile ? imageFile.name : "Choose file"}
+            </label>
             <input
-              id="cookTime"
-              type="number"
-              min={0}
-              value={cookTime}
-              onChange={(e) => setCookTime(parseNumericInput(e.target.value))}
-              required
+              id="image"
+              type="file"
+              accept="image/*"
+              className="sr-only"
+              onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="difficulty">Difficulty</label>
-            <select
-              id="difficulty"
-              value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value as Difficulty)}
-            >
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>Ingredients</label>
-          {ingredients.map((item, i) => (
-            <div key={i} className="dynamic-row">
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="servings">Servings</label>
               <input
-                type="text"
-                value={item}
-                onChange={(e) => updateIngredient(i, e.target.value)}
-                placeholder="e.g. 2 cups flour"
+                id="servings"
+                type="number"
+                min={1}
+                value={servings}
+                onChange={(e) => setServings(parseNumericInput(e.target.value))}
+                required
               />
-              <button
-                type="button"
-                onClick={() => removeIngredient(i)}
-                disabled={ingredients.length === 1}
-                className="remove-btn"
-              >
-                Remove
-              </button>
             </div>
-          ))}
-          <button type="button" onClick={addIngredient} className="add-btn">
-            + Add ingredient
-          </button>
-        </div>
 
-        <div className="form-group">
-          <label>Instructions</label>
-          {instructions.map((step, i) => (
-            <div key={i} className="dynamic-row">
-              <textarea
-                value={step}
-                onChange={(e) => updateInstruction(i, e.target.value)}
-                placeholder={`Step ${i + 1}`}
-                rows={2}
+            <div className="form-group">
+              <label htmlFor="prepTime">Prep time (mins)</label>
+              <input
+                id="prepTime"
+                type="number"
+                min={0}
+                value={prepTime}
+                onChange={(e) => setPrepTime(parseNumericInput(e.target.value))}
+                required
               />
-              <button
-                type="button"
-                onClick={() => removeInstruction(i)}
-                disabled={instructions.length === 1}
-                className="remove-btn"
-              >
-                Remove
-              </button>
             </div>
-          ))}
-          <button type="button" onClick={addInstruction} className="add-btn">
-            + Add step
-          </button>
-        </div>
 
-        <button type="submit" disabled={submitting} className="submit-btn">
-          {submitting ? "Saving…" : "Save Recipe"}
-        </button>
-      </form>
+            <div className="form-group">
+              <label htmlFor="cookTime">Cook time (mins)</label>
+              <input
+                id="cookTime"
+                type="number"
+                min={0}
+                value={cookTime}
+                onChange={(e) => setCookTime(parseNumericInput(e.target.value))}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="difficulty">Difficulty</label>
+              <select
+                id="difficulty"
+                value={difficulty}
+                onChange={(e) => setDifficulty(e.target.value as Difficulty)}
+              >
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Ingredients</label>
+            {ingredients.map((item, i) => (
+              <div key={i} className="dynamic-row">
+                <input
+                  type="text"
+                  value={item}
+                  onChange={(e) => updateIngredient(i, e.target.value)}
+                  placeholder="e.g. 2 cups flour"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeIngredient(i)}
+                  disabled={ingredients.length === 1}
+                  className="remove-btn"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button type="button" onClick={addIngredient} className="add-btn">
+              + Add ingredient
+            </button>
+          </div>
+
+          <div className="form-group">
+            <label>Instructions</label>
+            {instructions.map((step, i) => (
+              <div key={i} className="dynamic-row">
+                <textarea
+                  value={step}
+                  onChange={(e) => updateInstruction(i, e.target.value)}
+                  placeholder={`Step ${i + 1}`}
+                  rows={2}
+                />
+                <button
+                  type="button"
+                  onClick={() => removeInstruction(i)}
+                  disabled={instructions.length === 1}
+                  className="remove-btn"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button type="button" onClick={addInstruction} className="add-btn">
+              + Add step
+            </button>
+          </div>
+
+          <button type="submit" disabled={submitting} className="submit-btn">
+            {submitting ? "Saving…" : "Save Recipe"}
+          </button>
+        </form>
       </div>
     </div>
   );
