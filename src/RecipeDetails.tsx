@@ -34,7 +34,7 @@ function RecipeDetails() {
         </Link>
       </NavBar>
 
-      <div className="max-w-5xl 2xl:max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
+      <div className="wireframe max-w-5xl 2xl:max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr]">
           {recipe.image_url && (
             <img
