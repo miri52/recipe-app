@@ -112,11 +112,15 @@ function AddRecipe() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="image">Image</label>
+          <span className="form-label">Image</span>
+          <label htmlFor="image" className="file-picker" tabIndex={0}>
+            {imageFile ? imageFile.name : "Choose file"}
+          </label>
           <input
             id="image"
             type="file"
             accept="image/*"
+            className="sr-only"
             onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
           />
         </div>
