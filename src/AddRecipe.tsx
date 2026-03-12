@@ -4,7 +4,6 @@ import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
 import { Difficulty } from "./types";
 import NavBar from "./NavBar";
-import "./AddRecipe.css";
 
 function parseNumericInput(value: string): number | "" {
   return value === "" ? "" : Number(value);
@@ -94,30 +93,34 @@ function AddRecipe() {
     }
   }
 
+  const inputClasses = "border border-border rounded px-2.5 py-2 text-sm font-[inherit] w-full box-border";
+  const labelClasses = "text-sm font-semibold mb-1.5 text-primary";
+
   return (
     <div>
       <NavBar>
         <Link to="/" className="text-sm text-white!">← Back to home</Link>
       </NavBar>
-      <div className="AddRecipe wireframe">
+      <div className="wireframe max-w-[960px] mx-auto text-left">
         <h2 className="text-2xl font-bold uppercase mb-8">
           Add New Recipe
         </h2>
-        {error && <p className="add-recipe-error">{error}</p>}
-        <form onSubmit={handleSubmit} className="add-recipe-form">
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
+        {error && <p className="text-error mb-4">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col mb-5">
+            <label htmlFor="name" className={labelClasses}>Name</label>
             <input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              className={inputClasses}
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="hashtag">Hashtag</label>
+          <div className="flex flex-col mb-5">
+            <label htmlFor="hashtag" className={labelClasses}>Hashtag</label>
             <input
               id="hashtag"
               type="text"
@@ -125,12 +128,17 @@ function AddRecipe() {
               onChange={(e) => setHashtag(e.target.value)}
               placeholder="#italian"
               required
+              className={inputClasses}
             />
           </div>
 
-          <div className="form-group">
-            <span className="form-label">Image</span>
-            <label htmlFor="image" className="file-picker" tabIndex={0}>
+          <div className="flex flex-col mb-5">
+            <span className={labelClasses}>Image</span>
+            <label
+              htmlFor="image"
+              tabIndex={0}
+              className="border border-border rounded px-2.5 py-2 text-sm font-normal cursor-pointer focus:outline-2 focus:outline-primary focus:outline-offset-1"
+            >
               {imageFile ? imageFile.name : "Choose file"}
             </label>
             <input
@@ -142,9 +150,9 @@ function AddRecipe() {
             />
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="servings">Servings</label>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-5">
+            <div className="flex flex-col">
+              <label htmlFor="servings" className={labelClasses}>Servings</label>
               <input
                 id="servings"
                 type="number"
@@ -152,11 +160,12 @@ function AddRecipe() {
                 value={servings}
                 onChange={(e) => setServings(parseNumericInput(e.target.value))}
                 required
+                className={inputClasses}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="prepTime">Prep time (mins)</label>
+            <div className="flex flex-col">
+              <label htmlFor="prepTime" className={labelClasses}>Prep time (mins)</label>
               <input
                 id="prepTime"
                 type="number"
@@ -164,11 +173,12 @@ function AddRecipe() {
                 value={prepTime}
                 onChange={(e) => setPrepTime(parseNumericInput(e.target.value))}
                 required
+                className={inputClasses}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="cookTime">Cook time (mins)</label>
+            <div className="flex flex-col">
+              <label htmlFor="cookTime" className={labelClasses}>Cook time (mins)</label>
               <input
                 id="cookTime"
                 type="number"
@@ -176,15 +186,17 @@ function AddRecipe() {
                 value={cookTime}
                 onChange={(e) => setCookTime(parseNumericInput(e.target.value))}
                 required
+                className={inputClasses}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="difficulty">Difficulty</label>
+            <div className="flex flex-col">
+              <label htmlFor="difficulty" className={labelClasses}>Difficulty</label>
               <select
                 id="difficulty"
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value as Difficulty)}
+                className={inputClasses}
               >
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
@@ -193,57 +205,71 @@ function AddRecipe() {
             </div>
           </div>
 
-          <div className="form-group">
-            <label>Ingredients</label>
+          <div className="flex flex-col mb-5">
+            <label className={labelClasses}>Ingredients</label>
             {ingredients.map((item, i) => (
-              <div key={i} className="dynamic-row">
+              <div key={i} className="flex gap-2 items-start mb-2">
                 <input
                   type="text"
                   value={item}
                   onChange={(e) => updateIngredient(i, e.target.value)}
                   placeholder="e.g. 2 cups flour"
+                  className={`${inputClasses} flex-1`}
                 />
                 <button
                   type="button"
                   onClick={() => removeIngredient(i)}
                   disabled={ingredients.length === 1}
-                  className="remove-btn"
+                  className="px-2.5 py-1.5 bg-transparent border border-border rounded text-xs cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Remove
                 </button>
               </div>
             ))}
-            <button type="button" onClick={addIngredient} className="add-btn">
+            <button
+              type="button"
+              onClick={addIngredient}
+              className="mt-1 px-3 py-1.5 bg-transparent border border-primary rounded text-primary text-[13px] cursor-pointer self-start hover:bg-primary hover:text-white"
+            >
               + Add ingredient
             </button>
           </div>
 
-          <div className="form-group">
-            <label>Instructions</label>
+          <div className="flex flex-col mb-5">
+            <label className={labelClasses}>Instructions</label>
             {instructions.map((step, i) => (
-              <div key={i} className="dynamic-row">
+              <div key={i} className="flex gap-2 items-start mb-2">
                 <textarea
                   value={step}
                   onChange={(e) => updateInstruction(i, e.target.value)}
                   placeholder={`Step ${i + 1}`}
                   rows={2}
+                  className={`${inputClasses} flex-1 resize-y`}
                 />
                 <button
                   type="button"
                   onClick={() => removeInstruction(i)}
                   disabled={instructions.length === 1}
-                  className="remove-btn"
+                  className="px-2.5 py-1.5 bg-transparent border border-border rounded text-xs cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Remove
                 </button>
               </div>
             ))}
-            <button type="button" onClick={addInstruction} className="add-btn">
+            <button
+              type="button"
+              onClick={addInstruction}
+              className="mt-1 px-3 py-1.5 bg-transparent border border-primary rounded text-primary text-[13px] cursor-pointer self-start hover:bg-primary hover:text-white"
+            >
               + Add step
             </button>
           </div>
 
-          <button type="submit" disabled={submitting} className="submit-btn">
+          <button
+            type="submit"
+            disabled={submitting}
+            className="px-7 py-2.5 bg-accent text-white border-none rounded text-[15px] font-semibold cursor-pointer font-[inherit] hover:bg-accent-dark disabled:opacity-60 disabled:cursor-not-allowed"
+          >
             {submitting ? "Saving…" : "Save Recipe"}
           </button>
         </form>
