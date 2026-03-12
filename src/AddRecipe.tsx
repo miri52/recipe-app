@@ -31,6 +31,22 @@ function AddRecipe() {
     setSubmitting(true);
     setError(null);
 
+    if (!imageFile) {
+      setError("Please select an image.");
+      setSubmitting(false);
+      return;
+    }
+    if (!ingredients.some(isNonEmpty)) {
+      setError("Please add at least one ingredient.");
+      setSubmitting(false);
+      return;
+    }
+    if (!instructions.some(isNonEmpty)) {
+      setError("Please add at least one instruction.");
+      setSubmitting(false);
+      return;
+    }
+
     try {
       let image_url = "";
 
@@ -108,6 +124,7 @@ function AddRecipe() {
             value={hashtag}
             onChange={(e) => setHashtag(e.target.value)}
             placeholder="#italian"
+            required
           />
         </div>
 
