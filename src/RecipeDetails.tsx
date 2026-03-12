@@ -23,8 +23,15 @@ function RecipeDetails() {
       });
   }, [recipeId]);
 
-  if (loading) return <p>Loading…</p>;
-  if (!recipe) return <p>Recipe not found.</p>;
+  if (loading) return <><NavBar /><p className="wireframe">Loading…</p></>;
+  if (!recipe) return (
+    <>
+      <NavBar>
+        <Link to="/" className="text-sm text-white!">← Back to recipes</Link>
+      </NavBar>
+      <p className="wireframe">Recipe not found.</p>
+    </>
+  );
 
   return (
     <div className="RecipeDetails text-left">
