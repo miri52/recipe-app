@@ -49,30 +49,17 @@ function RecipeDetails() {
               {recipe.hashtag}
             </p>
             <div className="grid grid-cols-2 gap-3 mb-8">
-              <div className="border border-border rounded-md p-3">
-                <p className="text-xs text-muted mb-1">Prep time</p>
-                <p className="text-primary font-medium">
-                  {recipe.prep_time_mins} mins
-                </p>
-              </div>
-              <div className="border border-border rounded-md p-3">
-                <p className="text-xs text-muted mb-1">Cook time</p>
-                <p className="text-primary font-medium">
-                  {recipe.cook_time_mins} mins
-                </p>
-              </div>
-              <div className="border border-border rounded-md p-3">
-                <p className="text-xs text-muted mb-1">Servings</p>
-                <p className="text-primary font-medium">
-                  {recipe.servings} people
-                </p>
-              </div>
-              <div className="border border-border rounded-md p-3">
-                <p className="text-xs text-muted mb-1">Difficulty</p>
-                <p className="text-primary font-medium capitalize">
-                  {recipe.difficulty}
-                </p>
-              </div>
+              {[
+                { label: "Prep time", value: `${recipe.prep_time_mins} mins` },
+                { label: "Cook time", value: `${recipe.cook_time_mins} mins` },
+                { label: "Servings", value: `${recipe.servings} people` },
+                { label: "Difficulty", value: recipe.difficulty },
+              ].map(({ label, value }) => (
+                <div key={label} className="border border-border rounded-md p-3">
+                  <p className="text-xs text-muted mb-1">{label}</p>
+                  <p className="text-primary font-medium capitalize">{value}</p>
+                </div>
+              ))}
             </div>
             <h4 className="text-lg font-semibold mb-3">Ingredients</h4>
             <ul className="columns-1 sm:columns-2 gap-x-4 space-y-1 list-disc list-inside">
