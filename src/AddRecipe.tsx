@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
 import { Difficulty } from "./types";
+import NavBar from "./NavBar";
 import "./AddRecipe.css";
 
 function parseNumericInput(value: string): number | "" {
@@ -78,7 +79,9 @@ function AddRecipe() {
   }
 
   return (
-    <div className="AddRecipe wireframe">
+    <div className="AddRecipe">
+      <NavBar />
+      <div className="wireframe">
       <h2 className="text-2xl font-bold uppercase mb-8">
         Add New Recipe
       </h2>
@@ -221,6 +224,7 @@ function AddRecipe() {
           {submitting ? "Saving…" : "Save Recipe"}
         </button>
       </form>
+      </div>
     </div>
   );
 }

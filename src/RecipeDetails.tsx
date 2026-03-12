@@ -29,7 +29,7 @@ function RecipeDetails() {
   return (
     <div className="RecipeDetails text-left">
       <NavBar>
-        <Link to="/" className="text-sm" style={{ color: "#ffffff" }}>
+        <Link to="/" className="text-sm text-white!">
           ← Back to recipes
         </Link>
       </NavBar>
