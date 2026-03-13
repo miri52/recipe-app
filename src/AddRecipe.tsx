@@ -24,6 +24,7 @@ function AddRecipe() {
   const [instructions, updateInstruction, addInstruction, removeInstruction, instructionFocus] = useStringList();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const hashtagRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLLabelElement>(null);
   const ingredientRef = useRef<HTMLInputElement>(null);
   const instructionRef = useRef<HTMLInputElement>(null);
@@ -33,6 +34,12 @@ function AddRecipe() {
     setSubmitting(true);
     setError(null);
 
+    if (!hashtags.some(isNonEmpty)) {
+      setError("Please add at least one hashtag.");
+      setSubmitting(false);
+      hashtagRef.current?.focus();
+      return;
+    }
     if (!imageFile) {
       setError("Please select an image.");
       setSubmitting(false);
@@ -140,6 +147,7 @@ function AddRecipe() {
             {hashtags.map((tag, i) => (
               <div key={i} className="flex gap-2 items-start mb-2">
                 <input
+                  ref={i === 0 ? hashtagRef : undefined}
                   type="text"
                   value={tag}
                   onChange={(e) => updateHashtag(i, e.target.value)}
