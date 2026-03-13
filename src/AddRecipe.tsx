@@ -138,6 +138,12 @@ function AddRecipe() {
               htmlFor="image"
               tabIndex={0}
               className="border border-border rounded px-2.5 py-2 text-sm font-normal cursor-pointer focus:outline-2 focus:outline-primary focus:outline-offset-1"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  document.getElementById("image")?.click();
+                }
+              }}
             >
               {imageFile ? imageFile.name : "Choose file"}
             </label>
