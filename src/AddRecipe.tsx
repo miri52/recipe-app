@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
@@ -24,6 +24,9 @@ function AddRecipe() {
   const [instructions, updateInstruction, addInstruction, removeInstruction, instructionFocus] = useStringList();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const imageRef = useRef<HTMLLabelElement>(null);
+  const ingredientRef = useRef<HTMLInputElement>(null);
+  const instructionRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -33,16 +36,19 @@ function AddRecipe() {
     if (!imageFile) {
       setError("Please select an image.");
       setSubmitting(false);
+      imageRef.current?.focus();
       return;
     }
     if (!ingredients.some(isNonEmpty)) {
       setError("Please add at least one ingredient.");
       setSubmitting(false);
+      ingredientRef.current?.focus();
       return;
     }
     if (!instructions.some(isNonEmpty)) {
       setError("Please add at least one instruction.");
       setSubmitting(false);
+      instructionRef.current?.focus();
       return;
     }
 
@@ -164,6 +170,7 @@ function AddRecipe() {
           <div className="flex flex-col mb-5">
             <span className={labelClasses}>Image</span>
             <label
+              ref={imageRef}
               htmlFor="image"
               tabIndex={0}
               className="border border-border rounded px-2.5 py-2 text-sm font-normal cursor-pointer focus:outline-2 focus:outline-primary focus:outline-offset-1"
@@ -245,6 +252,7 @@ function AddRecipe() {
             {ingredients.map((item, i) => (
               <div key={i} className="flex gap-2 items-start mb-2">
                 <input
+                  ref={i === 0 ? ingredientRef : undefined}
                   type="text"
                   value={item}
                   onChange={(e) => updateIngredient(i, e.target.value)}
@@ -277,6 +285,7 @@ function AddRecipe() {
             {instructions.map((step, i) => (
               <div key={i} className="flex gap-2 items-start mb-2">
                 <input
+                  ref={i === 0 ? instructionRef : undefined}
                   type="text"
                   value={step}
                   onChange={(e) => updateInstruction(i, e.target.value)}
