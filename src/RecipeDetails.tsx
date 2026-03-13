@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { Recipe } from "./types";
 import RecipeInstructions from "./RecipeInstructions";
@@ -7,8 +7,10 @@ import NavBar from "./NavBar";
 
 function RecipeDetails() {
   const { recipeId } = useParams();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(!!recipeId);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (!recipeId) return;
@@ -22,6 +24,26 @@ function RecipeDetails() {
         setLoading(false);
       });
   }, [recipeId]);
+
+  async function handleDelete() {
+    if (!recipeId || !confirm("Are you sure you want to delete this recipe?")) return;
+    setDeleting(true);
+    const { error, count } = await supabase
+      .from("recipes")
+      .delete({ count: "exact" })
+      .eq("id", recipeId);
+    if (error) {
+      alert("Failed to delete recipe: " + error.message);
+      setDeleting(false);
+      return;
+    }
+    if (count === 0) {
+      alert("Could not delete recipe. Check Supabase permissions.");
+      setDeleting(false);
+      return;
+    }
+    navigate("/");
+  }
 
   if (loading) return <><NavBar /><p className="wireframe">Loading…</p></>;
   if (!recipe) return (
@@ -83,6 +105,18 @@ function RecipeDetails() {
 
         <div className="py-6">
           <RecipeInstructions instructions={recipe.instructions} />
+        </div>
+
+        <hr className="border-t border-border" />
+
+        <div className="py-6">
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="text-sm text-muted bg-transparent border-none cursor-pointer underline hover:text-error disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {deleting ? "Deleting…" : "Delete recipe"}
+          </button>
         </div>
       </div>
     </div>
