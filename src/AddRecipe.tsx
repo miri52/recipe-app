@@ -14,14 +14,14 @@ const isNonEmpty = (s: string) => s.trim() !== "";
 function AddRecipe() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [hashtag, setHashtag] = useState("");
+  const [hashtags, updateHashtag, addHashtag, removeHashtag, hashtagFocus] = useStringList();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [servings, setServings] = useState<number | "">(4);
   const [prepTime, setPrepTime] = useState<number | "">("");
   const [cookTime, setCookTime] = useState<number | "">("");
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
-  const [ingredients, updateIngredient, addIngredient, removeIngredient] = useStringList();
-  const [instructions, updateInstruction, addInstruction, removeInstruction] = useStringList();
+  const [ingredients, updateIngredient, addIngredient, removeIngredient, ingredientFocus] = useStringList();
+  const [instructions, updateInstruction, addInstruction, removeInstruction, instructionFocus] = useStringList();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -71,7 +71,10 @@ function AddRecipe() {
       const { error: insertError } = await supabase.from("recipes").insert([
         {
           name,
-          hashtag,
+          hashtag: hashtags
+            .filter(isNonEmpty)
+            .map((t) => (t.startsWith("#") ? t : `#${t}`))
+            .join(" "),
           image_url,
           servings: Number(servings),
           prep_time_mins: Number(prepTime),
@@ -90,6 +93,13 @@ function AddRecipe() {
       navigate("/");
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  function handleEnterToAdd(e: React.KeyboardEvent<HTMLInputElement>, addFn: () => void) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (e.currentTarget.value.trim()) addFn();
     }
   }
 
@@ -120,16 +130,35 @@ function AddRecipe() {
           </div>
 
           <div className="flex flex-col mb-5">
-            <label htmlFor="hashtag" className={labelClasses}>Hashtag</label>
-            <input
-              id="hashtag"
-              type="text"
-              value={hashtag}
-              onChange={(e) => setHashtag(e.target.value)}
-              placeholder="#italian"
-              required
-              className={inputClasses}
-            />
+            <label className={labelClasses}>Hashtags</label>
+            {hashtags.map((tag, i) => (
+              <div key={i} className="flex gap-2 items-start mb-2">
+                <input
+                  type="text"
+                  value={tag}
+                  onChange={(e) => updateHashtag(i, e.target.value)}
+                  onKeyDown={(e) => handleEnterToAdd(e, addHashtag)}
+                  autoFocus={i === hashtagFocus}
+                  placeholder="e.g. italian"
+                  className={`${inputClasses} flex-1`}
+                />
+                <button
+                  type="button"
+                  onClick={() => removeHashtag(i)}
+                  disabled={hashtags.length === 1}
+                  className="px-2.5 py-1.5 bg-transparent border border-border rounded text-xs cursor-pointer whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={addHashtag}
+              className="mt-1 px-3 py-1.5 bg-transparent border border-primary rounded text-primary text-[13px] cursor-pointer self-start hover:bg-primary hover:text-white"
+            >
+              + Add hashtag
+            </button>
           </div>
 
           <div className="flex flex-col mb-5">
@@ -219,6 +248,8 @@ function AddRecipe() {
                   type="text"
                   value={item}
                   onChange={(e) => updateIngredient(i, e.target.value)}
+                  onKeyDown={(e) => handleEnterToAdd(e, addIngredient)}
+                  autoFocus={i === ingredientFocus}
                   placeholder="e.g. 2 cups flour"
                   className={`${inputClasses} flex-1`}
                 />
@@ -245,12 +276,14 @@ function AddRecipe() {
             <label className={labelClasses}>Instructions</label>
             {instructions.map((step, i) => (
               <div key={i} className="flex gap-2 items-start mb-2">
-                <textarea
+                <input
+                  type="text"
                   value={step}
                   onChange={(e) => updateInstruction(i, e.target.value)}
+                  onKeyDown={(e) => handleEnterToAdd(e, addInstruction)}
+                  autoFocus={i === instructionFocus}
                   placeholder={`Step ${i + 1}`}
-                  rows={2}
-                  className={`${inputClasses} flex-1 resize-y`}
+                  className={`${inputClasses} flex-1`}
                 />
                 <button
                   type="button"
