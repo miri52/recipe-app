@@ -24,9 +24,10 @@ function Recipes() {
       });
   }, []);
 
-  const filtered = recipes.filter((r) =>
-    r.name.toLowerCase().includes(query.toLowerCase())
-  );
+  const filtered = recipes.filter((r) => {
+    const q = query.toLowerCase();
+    return r.name.toLowerCase().includes(q) || r.hashtag.toLowerCase().includes(q);
+  });
 
   return (
     <div className="Recipes">
