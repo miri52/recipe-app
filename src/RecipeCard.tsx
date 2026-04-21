@@ -16,7 +16,12 @@ function RecipeCard({ recipe }: RecipeCardProps) {
       className="RecipeCard flex flex-col h-full min-w-37.5 rounded border border-border bg-white overflow-hidden"
       to={`/recipes/${recipe.id}`}
     >
-        <img src={recipe.image_url || PLACEHOLDER_IMAGE} className="w-full" alt={recipe.name} />
+        <img
+          src={recipe.image_url || PLACEHOLDER_IMAGE}
+          onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
+          className="w-full"
+          alt={recipe.name}
+        />
         <div className="flex-1 p-4">
           <h5 className="text-2xl font-medium mb-3">{recipe.name}</h5>
           <p className="text-xs text-muted uppercase font-normal">{recipe.hashtag}</p>

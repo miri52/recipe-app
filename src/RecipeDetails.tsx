@@ -68,6 +68,7 @@ function RecipeDetails() {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr]">
           <img
             src={recipe.image_url || PLACEHOLDER_IMAGE}
+            onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
             alt={recipe.name}
             className="w-full h-full object-cover"
           />
