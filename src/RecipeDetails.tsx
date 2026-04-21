@@ -4,6 +4,7 @@ import { supabase } from "./supabaseClient";
 import { Recipe } from "./types";
 import RecipeInstructions from "./RecipeInstructions";
 import NavBar from "./NavBar";
+import { PLACEHOLDER_IMAGE } from "./placeholder";
 
 function RecipeDetails() {
   const { recipeId } = useParams();
@@ -65,13 +66,12 @@ function RecipeDetails() {
 
       <div className="wireframe max-w-5xl 2xl:max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr]">
-          {recipe.image_url && (
-            <img
-              src={recipe.image_url}
-              alt={recipe.name}
-              className="w-full h-full object-cover"
-            />
-          )}
+          <img
+            src={recipe.image_url || PLACEHOLDER_IMAGE}
+            onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }}
+            alt={recipe.name}
+            className="w-full h-full object-cover"
+          />
           <div className="py-6 md:px-8">
             <h1 className="text-3xl font-bold mb-1">{recipe.name}</h1>
             <p className="text-muted text-sm uppercase mb-6">
