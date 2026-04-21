@@ -7,6 +7,7 @@ import RecipeCard from "./RecipeCard";
 import { supabase } from "./supabaseClient";
 import { RecipeListItem } from "./types";
 import NavBar from "./NavBar";
+import { RECIPES_TABLE } from "./constants";
 
 function Recipes() {
   const [recipes, setRecipes] = useState<RecipeListItem[]>([]);
@@ -15,7 +16,7 @@ function Recipes() {
 
   useEffect(() => {
     supabase
-      .from("recipes")
+      .from(RECIPES_TABLE)
       .select("id, name, image_url, hashtag, created_at")
       .order("created_at", { ascending: false })
       .then(({ data }) => {

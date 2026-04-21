@@ -2,8 +2,9 @@ import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
-import { Difficulty } from "./types";
 import NavBar from "./NavBar";
+import { Difficulty } from "./types";
+import { DIFFICULTY_OPTIONS, DEFAULT_DIFFICULTY, DEFAULT_SERVINGS, RECIPES_TABLE, RECIPE_IMAGES_BUCKET } from "./constants";
 
 function parseNumericInput(value: string): number | "" {
   return value === "" ? "" : Number(value);
@@ -16,10 +17,10 @@ function AddRecipe() {
   const [name, setName] = useState("");
   const [hashtags, updateHashtag, addHashtag, removeHashtag, hashtagFocus] = useStringList();
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [servings, setServings] = useState<number | "">(4);
+  const [servings, setServings] = useState<number | "">(DEFAULT_SERVINGS);
   const [prepTime, setPrepTime] = useState<number | "">("");
   const [cookTime, setCookTime] = useState<number | "">("");
-  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY);
   const [ingredients, updateIngredient, addIngredient, removeIngredient, ingredientFocus] = useStringList();
   const [instructions, updateInstruction, addInstruction, removeInstruction, instructionFocus] = useStringList();
   const [submitting, setSubmitting] = useState(false);
@@ -66,7 +67,7 @@ function AddRecipe() {
         const ext = imageFile.name.split(".").pop();
         const fileName = `${Date.now()}.${ext}`;
         const { error: uploadError } = await supabase.storage
-          .from("recipe-images")
+          .from(RECIPE_IMAGES_BUCKET)
           .upload(fileName, imageFile);
 
         if (uploadError) {
@@ -75,13 +76,13 @@ function AddRecipe() {
         }
 
         const { data: urlData } = supabase.storage
-          .from("recipe-images")
+          .from(RECIPE_IMAGES_BUCKET)
           .getPublicUrl(fileName);
 
         image_url = urlData.publicUrl;
       }
 
-      const { error: insertError } = await supabase.from("recipes").insert([
+      const { error: insertError } = await supabase.from(RECIPES_TABLE).insert([
         {
           name,
           hashtag: hashtags
@@ -248,9 +249,9 @@ function AddRecipe() {
                 onChange={(e) => setDifficulty(e.target.value as Difficulty)}
                 className={inputClasses}
               >
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
+                {DIFFICULTY_OPTIONS.map(({ value, label }) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
               </select>
             </div>
           </div>
