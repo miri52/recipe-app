@@ -5,7 +5,6 @@ import { Recipe } from "./types";
 import RecipeInstructions from "./RecipeInstructions";
 import NavBar from "./NavBar";
 import { PLACEHOLDER_IMAGE } from "./placeholder";
-import { RECIPES_TABLE } from "./constants";
 
 function RecipeDetails() {
   const { recipeId } = useParams();
@@ -17,7 +16,7 @@ function RecipeDetails() {
   useEffect(() => {
     if (!recipeId) return;
     supabase
-      .from(RECIPES_TABLE)
+      .from("recipes")
       .select("*")
       .eq("id", recipeId)
       .single()
@@ -31,7 +30,7 @@ function RecipeDetails() {
     if (!recipeId || !confirm("Are you sure you want to delete this recipe?")) return;
     setDeleting(true);
     const { error, count } = await supabase
-      .from(RECIPES_TABLE)
+      .from("recipes")
       .delete({ count: "exact" })
       .eq("id", recipeId);
     if (error) {

@@ -3,8 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
 import NavBar from "./NavBar";
-import { Difficulty } from "./types";
-import { DIFFICULTY_OPTIONS, DEFAULT_DIFFICULTY, DEFAULT_SERVINGS, RECIPES_TABLE, RECIPE_IMAGES_BUCKET } from "./constants";
+import { Difficulty, DIFFICULTY_OPTIONS } from "./types";
 
 function parseNumericInput(value: string): number | "" {
   return value === "" ? "" : Number(value);
@@ -17,10 +16,10 @@ function AddRecipe() {
   const [name, setName] = useState("");
   const [hashtags, updateHashtag, addHashtag, removeHashtag, hashtagFocus] = useStringList();
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [servings, setServings] = useState<number | "">(DEFAULT_SERVINGS);
+  const [servings, setServings] = useState<number | "">(4);
   const [prepTime, setPrepTime] = useState<number | "">("");
   const [cookTime, setCookTime] = useState<number | "">("");
-  const [difficulty, setDifficulty] = useState(DEFAULT_DIFFICULTY);
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [ingredients, updateIngredient, addIngredient, removeIngredient, ingredientFocus] = useStringList();
   const [instructions, updateInstruction, addInstruction, removeInstruction, instructionFocus] = useStringList();
   const [submitting, setSubmitting] = useState(false);
@@ -67,7 +66,7 @@ function AddRecipe() {
         const ext = imageFile.name.split(".").pop();
         const fileName = `${Date.now()}.${ext}`;
         const { error: uploadError } = await supabase.storage
-          .from(RECIPE_IMAGES_BUCKET)
+          .from("recipe-images")
           .upload(fileName, imageFile);
 
         if (uploadError) {
@@ -76,13 +75,13 @@ function AddRecipe() {
         }
 
         const { data: urlData } = supabase.storage
-          .from(RECIPE_IMAGES_BUCKET)
+          .from("recipe-images")
           .getPublicUrl(fileName);
 
         image_url = urlData.publicUrl;
       }
 
-      const { error: insertError } = await supabase.from(RECIPES_TABLE).insert([
+      const { error: insertError } = await supabase.from("recipes").insert([
         {
           name,
           hashtag: hashtags

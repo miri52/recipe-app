@@ -1,4 +1,10 @@
-export type Difficulty = 'easy' | 'medium' | 'hard';
+export const DIFFICULTY_OPTIONS = [
+  { value: 'easy', label: 'Easy' },
+  { value: 'medium', label: 'Medium' },
+  { value: 'hard', label: 'Hard' },
+] as const;
+
+export type Difficulty = typeof DIFFICULTY_OPTIONS[number]['value'];
 
 export interface Recipe {
   id: string;
