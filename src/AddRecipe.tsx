@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "./supabaseClient";
 import { useStringList } from "./hooks/useStringList";
-import { Difficulty } from "./types";
 import NavBar from "./NavBar";
+import { Difficulty, DIFFICULTY_OPTIONS } from "./types";
 
 function parseNumericInput(value: string): number | "" {
   return value === "" ? "" : Number(value);
@@ -248,9 +248,9 @@ function AddRecipe() {
                 onChange={(e) => setDifficulty(e.target.value as Difficulty)}
                 className={inputClasses}
               >
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
+                {DIFFICULTY_OPTIONS.map(({ value, label }) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
               </select>
             </div>
           </div>
